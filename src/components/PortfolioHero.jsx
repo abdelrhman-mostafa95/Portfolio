@@ -247,7 +247,7 @@ export default function PortfolioHero({ title, subtitle, cta1, cta2 }) {
                                 <img
                                     src="/profile.png"
                                     alt="Profile"
-                                    className="w-80 h-full md:m-7"
+                                    className="w-80 h-full mt-7 md:m-7"
                                 />
                             </motion.div>
                         </div>
