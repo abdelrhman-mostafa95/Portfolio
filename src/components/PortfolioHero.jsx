@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import Container from "../components/Container";
-import colors from "../constants/colors";
-import { FaReact, FaHtml5, FaCss3Alt, FaBootstrap, FaGithub } from "react-icons/fa";
+import { useTheme } from "../hooks/useTheme";
+import { FaReact, FaHtml5, FaCss3Alt, FaBootstrap, FaGithub, FaDownload, FaArrowLeft } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss, SiRedux } from "react-icons/si";
 
 // Tech stack data with icons
@@ -19,7 +20,7 @@ const techStack = [
 ];
 
 // Floating particles component
-const FloatingParticle = ({ delay, x, y, size }) => (
+const FloatingParticle = ({ delay, x, y, size, accentColor }) => (
     <motion.div
         className="absolute rounded-full"
         style={{
@@ -27,7 +28,7 @@ const FloatingParticle = ({ delay, x, y, size }) => (
             height: size,
             left: x,
             top: y,
-            backgroundColor: colors.accent,
+            backgroundColor: accentColor,
         }}
         animate={{
             y: [0, -30, 0],
@@ -43,7 +44,9 @@ const FloatingParticle = ({ delay, x, y, size }) => (
     />
 );
 
-export default function PortfolioHero({ title, subtitle, cta1, cta2 }) {
+export default function PortfolioHero({ title, subtitle, cta1, cta2, cvLink = "/cv.pdf" }) {
+    const { colors } = useTheme();
+
     return (
         <section
             className="min-h-screen relative overflow-hidden pt-20 lg:pt-0"
@@ -70,14 +73,45 @@ export default function PortfolioHero({ title, subtitle, cta1, cta2 }) {
             />
 
             {/* Floating Particles */}
-            <FloatingParticle delay={0} x="10%" y="20%" size={8} />
-            <FloatingParticle delay={0.5} x="85%" y="15%" size={6} />
-            <FloatingParticle delay={1} x="70%" y="70%" size={10} />
-            <FloatingParticle delay={1.5} x="15%" y="60%" size={7} />
-            <FloatingParticle delay={2} x="50%" y="80%" size={5} />
-            <FloatingParticle delay={2.5} x="90%" y="50%" size={8} />
+            <FloatingParticle delay={0} x="10%" y="20%" size={8} accentColor={colors.accent} />
+            <FloatingParticle delay={0.5} x="85%" y="15%" size={6} accentColor={colors.accent} />
+            <FloatingParticle delay={1} x="70%" y="70%" size={10} accentColor={colors.accent} />
+            <FloatingParticle delay={1.5} x="15%" y="60%" size={7} accentColor={colors.accent} />
+            <FloatingParticle delay={2} x="50%" y="80%" size={5} accentColor={colors.accent} />
+            <FloatingParticle delay={2.5} x="90%" y="50%" size={8} accentColor={colors.accent} />
 
             <Container className="relative z-10 min-h-screen flex items-center">
+                {/* Back to Landing Button */}
+                <motion.div
+                    className="absolute top-8 left-4 md:left-8"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 }}
+                >
+                    <Link to="/">
+                        <motion.div
+                            className="flex items-center gap-2 px-4 py-2 rounded-full cursor-pointer"
+                            style={{
+                                backgroundColor: `${colors.secondary}40`,
+                                color: colors.background,
+                            }}
+                            whileHover={{
+                                backgroundColor: colors.secondary,
+                                x: -5,
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <motion.span
+                                animate={{ x: [0, -3, 0] }}
+                                transition={{ duration: 1, repeat: Infinity }}
+                            >
+                                <FaArrowLeft />
+                            </motion.span>
+                            <span className="text-sm font-medium">Back to Home</span>
+                        </motion.div>
+                    </Link>
+                </motion.div>
+
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
                     {/* Text Content */}
                     <motion.div
@@ -134,6 +168,30 @@ export default function PortfolioHero({ title, subtitle, cta1, cta2 }) {
                         >
                             <Button>{cta1}</Button>
                             <Button variant="outline">{cta2}</Button>
+
+                            {/* Download CV Button */}
+                            <motion.a
+                                href={cvLink}
+                                download
+                                className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium cursor-pointer"
+                                style={{
+                                    backgroundColor: colors.accent,
+                                    color: colors.primary,
+                                }}
+                                whileHover={{
+                                    scale: 1.05,
+                                    boxShadow: `0 10px 30px ${colors.accent}50`,
+                                }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <motion.span
+                                    animate={{ y: [0, 3, 0] }}
+                                    transition={{ duration: 1.5, repeat: Infinity }}
+                                >
+                                    <FaDownload />
+                                </motion.span>
+                                <span>Download CV</span>
+                            </motion.a>
                         </motion.div>
 
                         {/* Tech Stack */}
@@ -247,7 +305,7 @@ export default function PortfolioHero({ title, subtitle, cta1, cta2 }) {
                                 <img
                                     src="/profile.png"
                                     alt="Profile"
-                                    className="w-80 h-full mt-7 md:m-7"
+                                    className="w-full h-full object-cover object-top"
                                 />
                             </motion.div>
                         </div>

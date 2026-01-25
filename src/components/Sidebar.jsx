@@ -1,8 +1,10 @@
 import { motion, AnimatePresence } from "framer-motion";
-import colors from "../constants/colors";
+import { useTheme } from "../hooks/useTheme";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Sidebar({ isOpen, onClose }) {
-    const menuItems = ["Home", "About", "Works", "Clients", "Contact"];
+    const { colors } = useTheme();
+    const menuItems = ["Home", "About", "Projects", "Clients", "Contact"];
 
     return (
         <AnimatePresence>
@@ -42,6 +44,16 @@ export default function Sidebar({ isOpen, onClose }) {
                         >
                             ×
                         </motion.button>
+
+                        {/* Theme Toggle */}
+                        <motion.div
+                            className="absolute top-6 left-8"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3 }}
+                        >
+                            <ThemeToggle />
+                        </motion.div>
 
                         {/* Menu Items */}
                         <nav className="mt-20 space-y-2">
@@ -96,3 +108,4 @@ export default function Sidebar({ isOpen, onClose }) {
         </AnimatePresence>
     );
 }
+

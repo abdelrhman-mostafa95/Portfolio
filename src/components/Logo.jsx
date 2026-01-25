@@ -1,11 +1,8 @@
-export default function Logo({ className, style }) {
+export default function Logo({ className, src = "/logo-white.png" }) {
     return (
-        <div
-            className={className}
-        // style={style}
-        >
+        <div className={className}>
             <img
-                src="/logo-white.png"
+                src={src}
                 alt="Logo"
                 className="w-40 block"
             />
