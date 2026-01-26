@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 
-// Dark mode colors (current - night mode)
+// Dark mode colors (night mode) - from colors.js
 export const darkColors = {
     primary: '#213555',      // Dark Blue
     secondary: '#3E5879',    // Medium Blue

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import colors from "../constants/colors";
+import { useTheme } from "../hooks/useTheme";
 
 export default function Button({
     children,
@@ -8,6 +8,8 @@ export default function Button({
     className,
     ...props
 }) {
+    const { colors } = useTheme();
+
     const variants = {
         primary: {
             background: colors.background,

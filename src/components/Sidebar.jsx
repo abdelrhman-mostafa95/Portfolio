@@ -2,9 +2,33 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../hooks/useTheme";
 import ThemeToggle from "./ThemeToggle";
 
+import { useLocation } from "react-router-dom";
+
 export default function Sidebar({ isOpen, onClose }) {
     const { colors } = useTheme();
-    const menuItems = ["Home", "About", "Projects", "Clients", "Contact"];
+    const location = useLocation();
+    const isMobilePortfolio = location.pathname === '/mobile';
+
+    const menuItems = ["Home", "About", "Projects", "Freelance", "Contact"];
+
+    const handleNavClick = (e, item) => {
+        e.preventDefault();
+        const targetId = item.toLowerCase();
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+            // Close sidebar first
+            onClose();
+
+            // Smooth scroll to target after a short delay
+            setTimeout(() => {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 300); // Wait for sidebar close animation
+        }
+    };
 
     return (
         <AnimatePresence>
@@ -55,14 +79,14 @@ export default function Sidebar({ isOpen, onClose }) {
                             <ThemeToggle />
                         </motion.div>
 
-                        {/* Mobile Portfolio Button - Special */}
+                        {/* Portfolio Switcher Button */}
                         <motion.div
                             className="mt-16 mb-6"
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
                         >
-                            <a href="/mobile">
+                            <a href={isMobilePortfolio ? "/frontend" : "/mobile"}>
                                 <motion.div
                                     className="relative p-4 rounded-2xl overflow-hidden cursor-pointer"
                                     style={{
@@ -87,7 +111,7 @@ export default function Sidebar({ isOpen, onClose }) {
                                                 className="text-lg font-bold"
                                                 style={{ color: colors.background }}
                                             >
-                                                Mobile Portfolio 📱
+                                                {isMobilePortfolio ? "Frontend Portfolio" : "Mobile Portfolio"}
                                             </p>
                                         </div>
                                         <motion.div
@@ -109,6 +133,7 @@ export default function Sidebar({ isOpen, onClose }) {
                                 <motion.a
                                     key={item}
                                     href={`#${item.toLowerCase()}`}
+                                    onClick={(e) => handleNavClick(e, item)}
                                     className="block py-4 px-4 text-xl font-semibold rounded-xl cursor-pointer"
                                     style={{ color: colors.background }}
                                     initial={{ opacity: 0, x: 50 }}
@@ -131,24 +156,7 @@ export default function Sidebar({ isOpen, onClose }) {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
                         >
-                            <div
-                                className="p-4 rounded-xl"
-                                style={{ backgroundColor: `${colors.secondary}30` }}
-                            >
-                                <p
-                                    className="text-sm mb-2"
-                                    style={{ color: colors.accent }}
-                                >
-                                    Let's work together
-                                </p>
-                                <a
-                                    href="mailto:hello@example.com"
-                                    className="font-medium hover:underline"
-                                    style={{ color: colors.background }}
-                                >
-                                    hello@example.com
-                                </a>
-                            </div>
+
                         </motion.div>
                     </motion.div>
                 </>

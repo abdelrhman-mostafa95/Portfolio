@@ -19,7 +19,6 @@ import {
     SiTailwindcss,
     SiFramer,
     SiNodedotjs,
-    SiMongodb,
     SiFirebase,
     SiGit,
     SiGithub,
@@ -28,6 +27,19 @@ import {
     SiNpm
 } from "react-icons/si";
 import { VscCode } from "react-icons/vsc";
+import { FaReact, FaHtml5, FaCss3Alt, FaBootstrap, FaGithub } from "react-icons/fa";
+
+const techStack = [
+    { name: "HTML", icon: FaHtml5 },
+    { name: "CSS", icon: FaCss3Alt },
+    { name: "JavaScript", icon: SiJavascript },
+    { name: "TypeScript", icon: SiTypescript },
+    { name: "React", icon: FaReact },
+    { name: "Next.js", icon: SiNextdotjs },
+    { name: "Tailwind", icon: SiTailwindcss },
+    { name: "Bootstrap", icon: FaBootstrap },
+    { name: "GitHub", icon: FaGithub },
+];
 
 // Skills data
 const skillCategories = [
@@ -198,6 +210,8 @@ The system allows creating companies with customizable fields that users can fil
     },
 ];
 
+
+
 export default function FrontendPortfolio() {
     const [menuOpen, setMenuOpen] = useState(false);
     const { colors } = useTheme();
@@ -207,70 +221,79 @@ export default function FrontendPortfolio() {
             <Navbar onMenuOpen={() => setMenuOpen(true)} />
             <Sidebar isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
-            <PortfolioHero
-                title="Abdel-Rahman Mostafa"
-                subtitle="I build modern, high-quality frontend applications focused on performance, clean architecture, and great user experience."
-                cta1="View Projects"
-                cta2="Contact Me"
-            />
+            <section id="home">
+                <PortfolioHero
+                    title="Abdel-Rahman Mostafa"
+                    subtitle="I build modern, high-quality frontend applications focused on performance, clean architecture, and great user experience."
+                    cta1="View Projects"
+                    cta2="Contact Me"
+                    cvLink="/frontend-cv.pdf"
+                />
+            </section>
 
-            <AboutSection
-                title="About Me"
-                description="I'm a Frontend Developer with a strong engineering background, originally a Mechanical Engineer with over 5 years of professional experience that shaped my skills in leadership, teamwork, and problem-solving. After graduating from the ITI Frontend Development track in December 2025, I now combine an engineering mindset with modern frontend technologies to build clean, scalable, and user-focused web applications."
-                highlights={[
-                    "Responsive & Mobile-First",
-                    "Component Libraries",
-                    "Performance Optimization",
-                    "Team Collaboration",
-                ]}
-                education={[
-                    {
-                        title: "B.Sc. Mechanical Engineering",
-                        subtitle: "Arab Academy for Science, Technology and Maritime Transport",
-                        date: "2013 - 2018",
-                        logo: "/aast.png"
-                    }
-                ]}
-                internship={[
-                    {
-                        title: "ITI - Information Technology Institute",
-                        subtitle: "Frontend and Cross-Platform Development Track",
-                        date: "July 2025 - December 2025",
-                        logo: "/iti.png"
-                    }
-                ]}
-                courses={[
-                    {
-                        title: "Route Academy",
-                        subtitle: "Flutter Diploma",
-                        date: "2024",
-                        logo: "route.png"
-                    },
-                    {
-                        title: "itida",
-                        subtitle: "Freelancing Program",
-                        date: "2025",
-                        logo: "itida.png"
-                    },
-                ]}
-            />
+            <section id="about">
+                <AboutSection
+                    title="About Me"
+                    description="I'm a Frontend Developer with a strong engineering background, originally a Mechanical Engineer with over 5 years of professional experience that shaped my skills in leadership, teamwork, and problem-solving. After graduating from the ITI Frontend Development track in December 2025, I now combine an engineering mindset with modern frontend technologies to build clean, scalable, and user-focused web applications."
+                    highlights={[
+                        "Responsive & Mobile-First",
+                        "Component Libraries",
+                        "Performance Optimization",
+                        "Team Collaboration",
+                    ]}
+                    education={[
+                        {
+                            title: "B.Sc. Mechanical Engineering",
+                            subtitle: "Arab Academy for Science, Technology and Maritime Transport",
+                            date: "2013 - 2018",
+                            logo: "/aast.png"
+                        }
+                    ]}
+                    internship={[
+                        {
+                            title: "ITI - Information Technology Institute",
+                            subtitle: "Frontend and Cross-Platform Development Track",
+                            date: "July 2025 - December 2025",
+                            logo: "/iti.png"
+                        }
+                    ]}
+                    courses={[
+                        {
+                            title: "Route Academy",
+                            subtitle: "Flutter Diploma",
+                            date: "2024",
+                            logo: "route.png"
+                        },
+                        {
+                            title: "itida",
+                            subtitle: "Freelancing Program",
+                            date: "2025",
+                            logo: "itida.png"
+                        },
+                    ]}
+                />
+            </section>
 
             {/* Unified Background Wrapper for Projects, Freelance & Contact */}
             <div style={{ backgroundColor: colors.primary }}>
-                <ProjectsSection
-                    title="My Projects"
-                    subtitle="Here are some of my recent web development projects. Click on any project to see more details."
-                    projects={projects}
-                />
+                <section id="projects">
+                    <ProjectsSection
+                        title="My Projects"
+                        subtitle="Here are some of my recent web development projects. Click on any project to see more details."
+                        projects={projects}
+                    />
+                </section>
 
-                <FreelanceSection
-                    title="Freelance Projects"
-                    subtitle="Real-world solutions built for real clients"
-                    projects={freelanceProjects}
-                    ratingImage="/rating.png"
-                    platformUrl="https://mostaql.com/u/yourprofile"
-                    platformName="Mostaql"
-                />
+                <section id="freelance">
+                    <FreelanceSection
+                        title="Freelance Projects"
+                        subtitle="Real-world solutions built for real clients"
+                        projects={freelanceProjects}
+                        ratingImage="/rating.png"
+                        platformUrl="https://mostaql.com/u/yourprofile"
+                        platformName="Mostaql"
+                    />
+                </section>
 
                 <SkillsSection
                     title="My Skills"
@@ -279,12 +302,14 @@ export default function FrontendPortfolio() {
                     topSkills={topSkills}
                 />
 
-                <ContactSection
-                    whatsapp="+201029454138"
-                    github="https://github.com/abdelrhman-mostafa95"
-                    linkedin="https://www.linkedin.com/in/abdel-rahman-mostafa-saad/"
-                    email="abdelrhman.mostafa1095@gmail.com"
-                />
+                <section id="contact">
+                    <ContactSection
+                        whatsapp="+201029454138"
+                        github="https://github.com/abdelrhman-mostafa95"
+                        linkedin="https://www.linkedin.com/in/abdel-rahman-mostafa-saad/"
+                        email="abdelrhman.mostafa1095@gmail.com"
+                    />
+                </section>
 
                 <Footer name="Abdel-Rahman Mostafa" />
             </div>

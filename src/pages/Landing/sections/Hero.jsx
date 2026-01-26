@@ -252,7 +252,7 @@ export default function Hero() {
                     />
                     <PortfolioCard
                         title="Mobile Portfolio"
-                        description="Cross-platform mobile apps with Flutter & React Native"
+                        description="Cross-platform mobile apps with Flutter"
                         icon={FaMobileAlt}
                         onClick={() => navigate("/mobile")}
                         delay={1}

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Container from "../components/Container";
 import { useTheme } from "../hooks/useTheme";
+import { darkColors, lightColors } from "../context/ThemeContext";
 
 // Timeline Card Component for Education, Internship, Courses
 const TimelineCard = ({ icon, title, items, delay, accentColor, colors }) => (
@@ -38,19 +39,7 @@ const TimelineCard = ({ icon, title, items, delay, accentColor, colors }) => (
             />
 
             {/* Header */}
-            <div className="flex items-center gap-4 mb-5 relative z-10">
-                <motion.div
-                    className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl"
-                    style={{
-                        backgroundColor: `${accentColor}20`,
-                        border: `2px solid ${accentColor}50`
-                    }}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    animate={{ rotate: [0, 5, -5, 0] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                >
-                    {icon}
-                </motion.div>
+            <div className="mb-5 relative z-10">
                 <h3
                     className="text-xl md:text-2xl font-bold"
                     style={{ color: colors.primary }}
@@ -165,7 +154,10 @@ export default function AboutSection({
     internship = [],
     courses = []
 }) {
-    const { colors } = useTheme();
+    const { isDark } = useTheme();
+
+    // Invert colors for About section only
+    const colors = isDark ? lightColors : darkColors;
 
     return (
         <section

@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import Container from "../components/Container";
 import { useTheme } from "../hooks/useTheme";
+import { darkColors, lightColors } from "../context/ThemeContext";
 
 // Skill Category Card
-const SkillCategory = ({ title, icon, skills, delay, accentColor }) => {
-    const { colors } = useTheme();
+const SkillCategory = ({ title, icon, skills, delay, accentColor, invertedColors }) => {
+    const colors = invertedColors;
 
     return (
         <motion.div
@@ -56,7 +57,6 @@ const SkillCategory = ({ title, icon, skills, delay, accentColor }) => {
                             <motion.div
                                 className="px-4 py-2 rounded-xl flex items-center gap-2 cursor-default"
                                 style={{
-                                    backgroundColor: `${colors.primary}10`,
                                     border: `1px solid ${colors.primary}20`,
                                 }}
                                 whileHover={{
@@ -67,9 +67,6 @@ const SkillCategory = ({ title, icon, skills, delay, accentColor }) => {
                                 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                {skill.icon && (
-                                    <span className="text-lg">{skill.icon}</span>
-                                )}
                                 <span
                                     className="text-sm font-medium"
                                     style={{ color: colors.primary }}
@@ -86,8 +83,8 @@ const SkillCategory = ({ title, icon, skills, delay, accentColor }) => {
 };
 
 // Single Skill Bar (Alternative display)
-const SkillBar = ({ skill, index, delay }) => {
-    const { colors } = useTheme();
+const SkillBar = ({ skill, index, delay, invertedColors }) => {
+    const colors = invertedColors;
 
     return (
         <motion.div
@@ -134,7 +131,10 @@ export default function SkillsSection({
     categories = [],
     topSkills = [],
 }) {
-    const { colors } = useTheme();
+    const { isDark } = useTheme();
+
+    // Invert colors for Skills section only
+    const colors = isDark ? lightColors : darkColors;
 
     return (
         <section
@@ -230,6 +230,7 @@ export default function SkillsSection({
                                 skills={category.skills}
                                 delay={0.2 + index * 0.1}
                                 accentColor={category.color || colors.primary}
+                                invertedColors={colors}
                             />
                         ))}
                     </div>

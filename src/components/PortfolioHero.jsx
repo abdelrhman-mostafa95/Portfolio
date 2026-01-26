@@ -1,23 +1,8 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import Container from "../components/Container";
 import { useTheme } from "../hooks/useTheme";
-import { FaReact, FaHtml5, FaCss3Alt, FaBootstrap, FaGithub, FaDownload, FaArrowLeft } from "react-icons/fa";
-import { SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss, SiRedux } from "react-icons/si";
-
-// Tech stack data with icons
-const techStack = [
-    { name: "HTML", icon: FaHtml5 },
-    { name: "CSS", icon: FaCss3Alt },
-    { name: "JavaScript", icon: SiJavascript },
-    { name: "TypeScript", icon: SiTypescript },
-    { name: "React", icon: FaReact },
-    { name: "Next.js", icon: SiNextdotjs },
-    { name: "Tailwind", icon: SiTailwindcss },
-    { name: "Bootstrap", icon: FaBootstrap },
-    { name: "GitHub", icon: FaGithub },
-];
+import { FaDownload } from "react-icons/fa";
 
 // Floating particles component
 const FloatingParticle = ({ delay, x, y, size, accentColor }) => (
@@ -44,7 +29,7 @@ const FloatingParticle = ({ delay, x, y, size, accentColor }) => (
     />
 );
 
-export default function PortfolioHero({ title, subtitle, cta1, cta2, cvLink = "/cv.pdf" }) {
+export default function PortfolioHero({ title, subtitle, cta1, cta2, cvLink = "/cv.pdf", role = "FRONTEND DEVELOPER" }) {
     const { colors } = useTheme();
 
     return (
@@ -105,7 +90,7 @@ export default function PortfolioHero({ title, subtitle, cta1, cta2, cvLink = "/
                                 className="tracking-widest text-sm font-medium"
                                 style={{ color: colors.accent }}
                             >
-                                FRONTEND DEVELOPER
+                                {role}
                             </p>
                         </motion.div>
 
@@ -135,8 +120,28 @@ export default function PortfolioHero({ title, subtitle, cta1, cta2, cvLink = "/
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
                         >
-                            <Button>{cta1}</Button>
-                            <Button variant="outline">{cta2}</Button>
+                            <Button
+                                onClick={() => {
+                                    const projectsSection = document.getElementById('projects');
+                                    if (projectsSection) {
+                                        projectsSection.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                }}
+                            >
+                                {cta1}
+                            </Button>
+
+                            <Button
+                                variant="outline"
+                                onClick={() => {
+                                    const contactSection = document.getElementById('contact');
+                                    if (contactSection) {
+                                        contactSection.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                }}
+                            >
+                                {cta2}
+                            </Button>
 
                             {/* Download CV Button */}
                             <motion.a
@@ -163,43 +168,7 @@ export default function PortfolioHero({ title, subtitle, cta1, cta2, cvLink = "/
                             </motion.a>
                         </motion.div>
 
-                        {/* Tech Stack */}
-                        <motion.div
-                            className="mt-12 pt-8 border-t"
-                            style={{ borderColor: `${colors.secondary}50` }}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.7 }}
-                        >
-                            <p
-                                className="text-sm mb-4 tracking-wide"
-                                style={{ color: colors.accent }}
-                            >
-                                TECH STACK
-                            </p>
-                            <div className="flex gap-4 flex-wrap">
-                                {techStack.map((tech, i) => (
-                                    <motion.span
-                                        key={tech.name}
-                                        className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2"
-                                        style={{
-                                            backgroundColor: `${colors.secondary}40`,
-                                            color: colors.background
-                                        }}
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: 0.8 + i * 0.1 }}
-                                        whileHover={{
-                                            scale: 1.05,
-                                            backgroundColor: colors.secondary
-                                        }}
-                                    >
-                                        <tech.icon className="text-lg" />
-                                        {tech.name}
-                                    </motion.span>
-                                ))}
-                            </div>
-                        </motion.div>
+
                     </motion.div>
 
                     {/* Profile Image */}

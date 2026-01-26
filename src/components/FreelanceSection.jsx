@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Container from "../components/Container";
 import { useTheme } from "../hooks/useTheme";
 import { FaStar, FaExternalLinkAlt, FaBriefcase, FaCheckCircle, FaImages, FaTimes } from "react-icons/fa";
-import colors from "../constants/colors";
+import { darkColors, lightColors } from "../context/ThemeContext";
 
 // Photo Gallery Modal
-const PhotoGalleryModal = ({ photos, isOpen, onClose, projectTitle }) => {
-    const { colors } = useTheme();
+const PhotoGalleryModal = ({ photos, isOpen, onClose, projectTitle, invertedColors }) => {
+    const colors = invertedColors;
     const [currentIndex, setCurrentIndex] = useState(0);
 
     if (!isOpen || !photos || photos.length === 0) return null;
@@ -140,8 +140,8 @@ const PhotoGalleryModal = ({ photos, isOpen, onClose, projectTitle }) => {
 };
 
 // Freelance Project Card
-const FreelanceCard = ({ project, index }) => {
-    const { colors } = useTheme();
+const FreelanceCard = ({ project, index, invertedColors }) => {
+    const colors = invertedColors;
 
     return (
         <motion.div
@@ -314,7 +314,11 @@ export default function FreelanceSection({
     subtitle = "Client projects delivered with excellence",
     projects = [],
 }) {
-    const { colors } = useTheme();
+    const { isDark } = useTheme();
+
+    // Invert colors for Freelance section only
+    const colors = isDark ? lightColors : darkColors;
+
     const [selectedProject, setSelectedProject] = useState(null);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
@@ -331,7 +335,7 @@ export default function FreelanceSection({
     return (
         <section
             className="py-20 md:py-32 relative overflow-hidden"
-            style={{ backgroundColor: colors.primary }}
+            style={{ backgroundColor: colors.background }}
         >
             {/* Background Decorations */}
             <motion.div
@@ -375,7 +379,7 @@ export default function FreelanceSection({
                         <FaStar style={{ color: colors.accent }} />
                         <span
                             className="text-sm font-medium tracking-wide"
-                            style={{ color: colors.accent }}
+                            style={{ color: isDark ? '#F5EFE7' : colors.primary }}
                         >
                             FREELANCE PORTFOLIO
                         </span>
@@ -384,7 +388,7 @@ export default function FreelanceSection({
 
                     <motion.h2
                         className="text-4xl md:text-5xl font-bold mb-4"
-                        style={{ color: colors.background }}
+                        style={{ color: isDark ? '#F5EFE7' : colors.primary }}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -395,7 +399,7 @@ export default function FreelanceSection({
 
                     <motion.p
                         className="text-lg md:text-xl max-w-2xl mx-auto"
-                        style={{ color: colors.accent }}
+                        style={{ color: isDark ? '#F5EFE7' : colors.primary }}
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 0.8 }}
                         viewport={{ once: true }}
@@ -415,6 +419,7 @@ export default function FreelanceSection({
                                 onViewPhotos: () => openGallery(project)
                             }}
                             index={index}
+                            invertedColors={colors}
                         />
                     ))}
                 </div>
@@ -442,6 +447,7 @@ export default function FreelanceSection({
                     isOpen={isGalleryOpen}
                     onClose={closeGallery}
                     projectTitle={selectedProject.title}
+                    invertedColors={colors}
                 />
             )}
         </section>
