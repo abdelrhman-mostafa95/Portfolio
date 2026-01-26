@@ -55,8 +55,56 @@ export default function Sidebar({ isOpen, onClose }) {
                             <ThemeToggle />
                         </motion.div>
 
+                        {/* Mobile Portfolio Button - Special */}
+                        <motion.div
+                            className="mt-16 mb-6"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                        >
+                            <a href="/mobile">
+                                <motion.div
+                                    className="relative p-4 rounded-2xl overflow-hidden cursor-pointer"
+                                    style={{
+                                        background: `linear-gradient(135deg, ${colors.accent}20, ${colors.secondary}40)`,
+                                        border: `2px solid ${colors.accent}`,
+                                    }}
+                                    whileHover={{
+                                        scale: 1.05,
+                                        boxShadow: `0 10px 30px ${colors.accent}50`,
+                                    }}
+                                    whileTap={{ scale: 0.98 }}
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <p
+                                                className="text-xs font-medium mb-1 tracking-wide"
+                                                style={{ color: colors.accent }}
+                                            >
+                                                SWITCH TO
+                                            </p>
+                                            <p
+                                                className="text-lg font-bold"
+                                                style={{ color: colors.background }}
+                                            >
+                                                Mobile Portfolio 📱
+                                            </p>
+                                        </div>
+                                        <motion.div
+                                            className="w-10 h-10 rounded-full flex items-center justify-center"
+                                            style={{ backgroundColor: colors.accent }}
+                                            animate={{ x: [0, 5, 0] }}
+                                            transition={{ duration: 1.5, repeat: Infinity }}
+                                        >
+                                            <span style={{ color: colors.primary }}>→</span>
+                                        </motion.div>
+                                    </div>
+                                </motion.div>
+                            </a>
+                        </motion.div>
+
                         {/* Menu Items */}
-                        <nav className="mt-20 space-y-2">
+                        <nav className="space-y-2">
                             {menuItems.map((item, index) => (
                                 <motion.a
                                     key={item}

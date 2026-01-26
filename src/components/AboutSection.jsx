@@ -103,28 +103,52 @@ const TimelineCard = ({ icon, title, items, delay, accentColor, colors }) => (
                             whileHover={{ x: 5 }}
                             transition={{ duration: 0.2 }}
                         >
-                            <h4
-                                className="font-semibold text-base md:text-lg"
-                                style={{ color: colors.primary }}
-                            >
-                                {item.title}
-                            </h4>
-                            {item.subtitle && (
-                                <p
-                                    className="text-sm mt-1"
-                                    style={{ color: accentColor }}
-                                >
-                                    {item.subtitle}
-                                </p>
-                            )}
-                            {item.date && (
-                                <p
-                                    className="text-xs mt-1 opacity-70"
-                                    style={{ color: colors.secondary }}
-                                >
-                                    📅 {item.date}
-                                </p>
-                            )}
+                            <div className="flex items-start gap-3">
+                                {/* Logo/Image */}
+                                {item.logo && (
+                                    <motion.div
+                                        className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden"
+                                        style={{
+                                            backgroundColor: '#FFFFFF',
+                                            border: `2px solid ${accentColor}30`,
+                                            boxShadow: `0 4px 12px ${colors.primary}15`
+                                        }}
+                                        whileHover={{ scale: 1.1 }}
+                                    >
+                                        <img
+                                            src={item.logo}
+                                            alt={item.title}
+                                            className="w-full h-full object-contain p-1"
+                                        />
+                                    </motion.div>
+                                )}
+
+                                {/* Text Content */}
+                                <div className="flex-1">
+                                    <h4
+                                        className="font-semibold text-base md:text-lg"
+                                        style={{ color: colors.primary }}
+                                    >
+                                        {item.title}
+                                    </h4>
+                                    {item.subtitle && (
+                                        <p
+                                            className="text-sm mt-1"
+                                            style={{ color: accentColor }}
+                                        >
+                                            {item.subtitle}
+                                        </p>
+                                    )}
+                                    {item.date && (
+                                        <p
+                                            className="text-xs mt-1 opacity-70"
+                                            style={{ color: colors.secondary }}
+                                        >
+                                            {item.date}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
                         </motion.div>
                     </motion.div>
                 ))}

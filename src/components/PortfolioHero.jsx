@@ -81,47 +81,16 @@ export default function PortfolioHero({ title, subtitle, cta1, cta2, cvLink = "/
             <FloatingParticle delay={2.5} x="90%" y="50%" size={8} accentColor={colors.accent} />
 
             <Container className="relative z-10 min-h-screen flex items-center">
-                {/* Back to Landing Button */}
-                <motion.div
-                    className="absolute top-8 left-4 md:left-8"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5 }}
-                >
-                    <Link to="/">
-                        <motion.div
-                            className="flex items-center gap-2 px-4 py-2 rounded-full cursor-pointer"
-                            style={{
-                                backgroundColor: `${colors.secondary}40`,
-                                color: colors.background,
-                            }}
-                            whileHover={{
-                                backgroundColor: colors.secondary,
-                                x: -5,
-                            }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <motion.span
-                                animate={{ x: [0, -3, 0] }}
-                                transition={{ duration: 1, repeat: Infinity }}
-                            >
-                                <FaArrowLeft />
-                            </motion.span>
-                            <span className="text-sm font-medium">Back to Home</span>
-                        </motion.div>
-                    </Link>
-                </motion.div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
                     {/* Text Content */}
                     <motion.div
-                        className="order-2 lg:order-1"
+                        className="order-2 lg:order-1 text-center lg:text-left"
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
                         <motion.div
-                            className="flex items-center gap-3 mb-6"
+                            className="flex items-center gap-3 mb-6 justify-center lg:justify-start"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
@@ -141,7 +110,7 @@ export default function PortfolioHero({ title, subtitle, cta1, cta2, cvLink = "/
                         </motion.div>
 
                         <motion.h1
-                            className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+                            className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight mb-6"
                             style={{ color: colors.background }}
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -161,7 +130,7 @@ export default function PortfolioHero({ title, subtitle, cta1, cta2, cvLink = "/
                         </motion.p>
 
                         <motion.div
-                            className="flex flex-wrap gap-4"
+                            className="flex flex-wrap gap-4 justify-center lg:justify-start"
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
@@ -287,7 +256,7 @@ export default function PortfolioHero({ title, subtitle, cta1, cta2, cvLink = "/
 
                             {/* Profile Image Container */}
                             <motion.div
-                                className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden"
+                                className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden"
                                 style={{
                                     border: `4px solid ${colors.accent}`,
                                     boxShadow: `0 25px 50px -12px ${colors.primary}80`,

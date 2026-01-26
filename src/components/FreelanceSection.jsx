@@ -1,8 +1,143 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Container from "../components/Container";
 import { useTheme } from "../hooks/useTheme";
-import { FaStar, FaExternalLinkAlt, FaBriefcase, FaCheckCircle } from "react-icons/fa";
+import { FaStar, FaExternalLinkAlt, FaBriefcase, FaCheckCircle, FaImages, FaTimes } from "react-icons/fa";
 import colors from "../constants/colors";
+
+// Photo Gallery Modal
+const PhotoGalleryModal = ({ photos, isOpen, onClose, projectTitle }) => {
+    const { colors } = useTheme();
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    if (!isOpen || !photos || photos.length === 0) return null;
+
+    const nextPhoto = () => {
+        setCurrentIndex((prev) => (prev + 1) % photos.length);
+    };
+
+    const prevPhoto = () => {
+        setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length);
+    };
+
+    return (
+        <AnimatePresence>
+            <motion.div
+                className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={onClose}
+            >
+                {/* Backdrop */}
+                <div
+                    className="absolute inset-0 backdrop-blur-md"
+                    style={{ backgroundColor: `${colors.primary}95` }}
+                />
+
+                {/* Modal Content */}
+                <motion.div
+                    className="relative w-full max-w-5xl max-h-[90vh] flex flex-col"
+                    initial={{ scale: 0.9, y: 50 }}
+                    animate={{ scale: 1, y: 0 }}
+                    exit={{ scale: 0.9, y: 50 }}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {/* Header */}
+                    <div
+                        className="flex items-center justify-between p-4 rounded-t-2xl"
+                        style={{ backgroundColor: colors.background }}
+                    >
+                        <h3
+                            className="text-lg md:text-xl font-bold"
+                            style={{ color: colors.primary }}
+                        >
+                            {projectTitle} - Photos ({currentIndex + 1}/{photos.length})
+                        </h3>
+                        <motion.button
+                            className="w-10 h-10 rounded-full flex items-center justify-center"
+                            style={{
+                                backgroundColor: colors.primary,
+                                color: colors.background
+                            }}
+                            onClick={onClose}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <FaTimes />
+                        </motion.button>
+                    </div>
+
+                    {/* Image Container */}
+                    <div
+                        className="relative flex-1 rounded-b-2xl overflow-hidden"
+                        style={{ backgroundColor: colors.background }}
+                    >
+                        <motion.img
+                            key={currentIndex}
+                            src={photos[currentIndex]}
+                            alt={`${projectTitle} - Photo ${currentIndex + 1}`}
+                            className="w-full h-full object-contain"
+                            initial={{ opacity: 0, x: 100 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -100 }}
+                            transition={{ duration: 0.3 }}
+                        />
+
+                        {/* Navigation Arrows */}
+                        {photos.length > 1 && (
+                            <>
+                                {/* Previous Button */}
+                                <motion.button
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center"
+                                    style={{
+                                        backgroundColor: `${colors.primary}90`,
+                                        color: colors.background
+                                    }}
+                                    onClick={prevPhoto}
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    ‹
+                                </motion.button>
+
+                                {/* Next Button */}
+                                <motion.button
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center"
+                                    style={{
+                                        backgroundColor: `${colors.primary}90`,
+                                        color: colors.background
+                                    }}
+                                    onClick={nextPhoto}
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    ›
+                                </motion.button>
+                            </>
+                        )}
+
+                        {/* Dots Indicator */}
+                        {photos.length > 1 && (
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                                {photos.map((_, idx) => (
+                                    <button
+                                        key={idx}
+                                        className="w-2 h-2 rounded-full transition-all"
+                                        style={{
+                                            backgroundColor: idx === currentIndex ? colors.accent : `${colors.accent}40`
+                                        }}
+                                        onClick={() => setCurrentIndex(idx)}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </motion.div>
+            </motion.div>
+        </AnimatePresence>
+    );
+};
 
 // Freelance Project Card
 const FreelanceCard = ({ project, index }) => {
@@ -136,6 +271,30 @@ const FreelanceCard = ({ project, index }) => {
                             ))}
                         </div>
                     )}
+
+                    {/* View Photos Button */}
+                    {project.photos && project.photos.length > 0 && (
+                        <motion.button
+                            onClick={() => project.onViewPhotos && project.onViewPhotos()}
+                            className="mt-6 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium"
+                            style={{
+                                backgroundColor: colors.accent,
+                                color: colors.primary,
+                            }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.6 }}
+                            whileHover={{
+                                scale: 1.02,
+                                boxShadow: `0 10px 30px ${colors.accent}50`,
+                            }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            <FaImages />
+                            <span>View Photos</span>
+                        </motion.button>
+                    )}
                 </div>
 
                 {/* Hover Glow Effect */}
@@ -150,74 +309,24 @@ const FreelanceCard = ({ project, index }) => {
     );
 };
 
-// Rating Badge Component  
-const RatingBadge = ({ ratingImage, platformUrl, platformName }) => (
-    <motion.a
-        href={platformUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-4 p-4 md:p-6 rounded-2xl cursor-pointer"
-        style={{
-            backgroundColor: colors.background,
-            border: `2px solid ${colors.primary}40`,
-            boxShadow: `0 15px 50px ${colors.primary}30`,
-        }}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.5, type: "spring" }}
-        whileHover={{
-            scale: 1.05,
-            borderColor: colors.primary,
-            boxShadow: `0 20px 60px ${colors.primary}40`,
-        }}
-        whileTap={{ scale: 0.98 }}
-    >
-        {/* Rating Image */}
-        {ratingImage && (
-            <img
-                src={ratingImage}
-                alt="Rating"
-                className="h-12 md:h-16 w-auto object-contain"
-            />
-        )}
-
-        {/* Platform Info */}
-        <div className="flex flex-col">
-            <span
-                className="text-sm opacity-70"
-                style={{ color: colors.secondary }}
-            >
-                View my profile on
-            </span>
-            <span
-                className="text-lg md:text-xl font-bold"
-                style={{ color: colors.primary }}
-            >
-                {platformName}
-            </span>
-        </div>
-
-        {/* Arrow */}
-        <motion.div
-            className="ml-4 w-10 h-10 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: colors.primary }}
-            whileHover={{ scale: 1.1 }}
-        >
-            <FaExternalLinkAlt style={{ color: colors.background }} />
-        </motion.div>
-    </motion.a>
-);
-
 export default function FreelanceSection({
     title = "Freelance Work",
     subtitle = "Client projects delivered with excellence",
     projects = [],
-    ratingImage = null,
-    platformUrl = "",
-    platformName = "Freelance Platform",
 }) {
     const { colors } = useTheme();
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
+    const openGallery = (project) => {
+        setSelectedProject(project);
+        setIsGalleryOpen(true);
+    };
+
+    const closeGallery = () => {
+        setIsGalleryOpen(false);
+        setTimeout(() => setSelectedProject(null), 300);
+    };
 
     return (
         <section
@@ -297,11 +406,14 @@ export default function FreelanceSection({
                 </motion.div>
 
                 {/* Projects Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 mb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
                     {projects.map((project, index) => (
                         <FreelanceCard
                             key={project.id || index}
-                            project={project}
+                            project={{
+                                ...project,
+                                onViewPhotos: () => openGallery(project)
+                            }}
                             index={index}
                         />
                     ))}
@@ -320,22 +432,18 @@ export default function FreelanceSection({
                     </motion.div>
                 )}
 
-                {/* Rating & Platform Link */}
-                {(ratingImage || platformUrl) && (
-                    <motion.div
-                        className="flex justify-center"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                    >
-                        <RatingBadge
-                            ratingImage={ratingImage}
-                            platformUrl={platformUrl}
-                            platformName={platformName}
-                        />
-                    </motion.div>
-                )}
+
             </Container>
+
+            {/* Photo Gallery Modal */}
+            {isGalleryOpen && selectedProject && (
+                <PhotoGalleryModal
+                    photos={selectedProject.photos}
+                    isOpen={isGalleryOpen}
+                    onClose={closeGallery}
+                    projectTitle={selectedProject.title}
+                />
+            )}
         </section>
     );
 }

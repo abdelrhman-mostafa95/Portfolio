@@ -37,10 +37,10 @@ const SocialLink = ({ icon: Icon, label, href, color }) => {
 };
 
 export default function ContactSection({
-    whatsapp = "",
-    github = "",
-    linkedin = "",
-    email = "",
+    whatsapp = "+201029454138",
+    github = "https://github.com/abdelrhman-mostafa95",
+    linkedin = "https://www.linkedin.com/in/abdel-rahman-mostafa-saad/",
+    email = "abdelrhman.mostafa1095@gmail.com",
 }) {
     const { colors } = useTheme();
     const [formData, setFormData] = useState({
@@ -68,7 +68,7 @@ export default function ContactSection({
 
     const socials = [
         { icon: FaWhatsapp, label: "WhatsApp", href: `https://wa.me/${whatsapp}`, color: "#25D366" },
-        { icon: FaGithub, label: "GitHub", href: github, color: "#fff" },
+        { icon: FaGithub, label: "GitHub", href: github, color: "#000000" },
         { icon: FaLinkedinIn, label: "LinkedIn", href: linkedin, color: "#0A66C2" },
     ];
 
@@ -133,7 +133,7 @@ export default function ContactSection({
                                     className="font-medium group-hover:underline"
                                     style={{ color: colors.background }}
                                 >
-                                    {email || "your.email@example.com"}
+                                    {email || "abdelrhman.mostafa1095@gmail.com"}
                                 </p>
                             </div>
                         </motion.a>
@@ -188,7 +188,7 @@ export default function ContactSection({
                                         color: colors.background,
                                         border: `1px solid ${colors.accent}30`,
                                     }}
-                                    placeholder="John Doe"
+                                    placeholder="name"
                                 />
                             </div>
 
@@ -212,7 +212,7 @@ export default function ContactSection({
                                         color: colors.background,
                                         border: `1px solid ${colors.accent}30`,
                                     }}
-                                    placeholder="john@example.com"
+                                    placeholder="@"
                                 />
                             </div>
 
@@ -236,7 +236,7 @@ export default function ContactSection({
                                         color: colors.background,
                                         border: `1px solid ${colors.accent}30`,
                                     }}
-                                    placeholder="Tell me about your project..."
+                                    placeholder="message"
                                 />
                             </div>
 

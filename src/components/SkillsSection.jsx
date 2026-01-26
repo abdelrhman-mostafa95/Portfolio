@@ -34,16 +34,6 @@ const SkillCategory = ({ title, icon, skills, delay, accentColor }) => {
 
                 {/* Header */}
                 <div className="flex items-center gap-4 mb-6">
-                    <motion.div
-                        className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
-                        style={{
-                            backgroundColor: `${accentColor}20`,
-                            border: `2px solid ${accentColor}40`
-                        }}
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                    >
-                        {icon}
-                    </motion.div>
                     <h3
                         className="text-xl md:text-2xl font-bold"
                         style={{ color: colors.primary }}
@@ -243,38 +233,6 @@ export default function SkillsSection({
                             />
                         ))}
                     </div>
-                )}
-
-                {/* Top Skills with Progress Bars */}
-                {topSkills.length > 0 && (
-                    <motion.div
-                        className="max-w-3xl mx-auto p-8 rounded-3xl"
-                        style={{
-                            backgroundColor: colors.primary,
-                            boxShadow: `0 20px 60px ${colors.primary}40`,
-                        }}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.5 }}
-                    >
-                        <h3
-                            className="text-2xl font-bold mb-6 text-center"
-                            style={{ color: colors.background }}
-                        >
-                            Core Competencies
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-                            {topSkills.map((skill, index) => (
-                                <SkillBar
-                                    key={index}
-                                    skill={skill}
-                                    index={index}
-                                    delay={0.6}
-                                />
-                            ))}
-                        </div>
-                    </motion.div>
                 )}
             </Container>
         </section>

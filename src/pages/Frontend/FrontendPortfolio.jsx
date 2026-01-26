@@ -9,47 +9,64 @@ import SkillsSection from "../../components/SkillsSection";
 import ContactSection from "../../components/ContactSection";
 import Footer from "../../components/Footer";
 import { useTheme } from "../../hooks/useTheme";
+import {
+    SiReact,
+    SiNextdotjs,
+    SiTypescript,
+    SiJavascript,
+    SiHtml5,
+    SiCss3,
+    SiTailwindcss,
+    SiFramer,
+    SiNodedotjs,
+    SiMongodb,
+    SiFirebase,
+    SiGit,
+    SiGithub,
+    SiFigma,
+    SiVercel,
+    SiNpm
+} from "react-icons/si";
+import { VscCode } from "react-icons/vsc";
 
 // Skills data
 const skillCategories = [
     {
         title: "Frontend",
-        icon: "🎨",
+        icon: "",
         color: "#6366f1",
         skills: [
-            { name: "React", icon: "⚛️" },
-            { name: "Next.js", icon: "▲" },
-            { name: "TypeScript", icon: "📘" },
-            { name: "JavaScript", icon: "🟨" },
-            { name: "HTML5", icon: "🌐" },
-            { name: "CSS3", icon: "🎨" },
-            { name: "Tailwind CSS", icon: "💨" },
-            { name: "Framer Motion", icon: "🎬" },
+            { name: "React", icon: <SiReact /> },
+            { name: "Next.js", icon: <SiNextdotjs /> },
+            { name: "TypeScript", icon: <SiTypescript /> },
+            { name: "JavaScript", icon: <SiJavascript /> },
+            { name: "HTML5", icon: <SiHtml5 /> },
+            { name: "CSS3", icon: <SiCss3 /> },
+            { name: "Tailwind CSS", icon: <SiTailwindcss /> },
+            { name: "Framer Motion", icon: <SiFramer /> },
         ]
     },
     {
         title: "Backend",
-        icon: "⚙️",
+        icon: "",
         color: "#10b981",
         skills: [
-            { name: "Node.js", icon: "🟢" },
-            { name: "Express", icon: "🚂" },
-            { name: "MongoDB", icon: "🍃" },
+            { name: "Fundementals of Node.js", icon: <SiNodedotjs /> },
             { name: "REST APIs", icon: "🔗" },
-            { name: "Firebase", icon: "🔥" },
+            { name: "Firebase", icon: <SiFirebase /> },
         ]
     },
     {
         title: "Tools & Others",
-        icon: "🛠️",
+        icon: "",
         color: "#f59e0b",
         skills: [
-            { name: "Git", icon: "📚" },
-            { name: "GitHub", icon: "🐙" },
-            { name: "VS Code", icon: "💻" },
-            { name: "Figma", icon: "🎯" },
-            { name: "Vercel", icon: "▲" },
-            { name: "npm", icon: "📦" },
+            { name: "Git", icon: <SiGit /> },
+            { name: "GitHub", icon: <SiGithub /> },
+            { name: "VS Code", icon: <VscCode /> },
+            { name: "Figma", icon: <SiFigma /> },
+            { name: "Vercel", icon: <SiVercel /> },
+            { name: "npm", icon: <SiNpm /> },
         ]
     },
 ];
@@ -68,42 +85,70 @@ const topSkills = [
 const projects = [
     {
         id: 1,
-        title: "E-Commerce Platform",
-        description: "A full-featured e-commerce platform with product catalog, shopping cart, and payment integration. Built with modern technologies for optimal performance.",
+        title: "Pato Restaurant ( Restaurant Website UI )",
+        description: `A visually engaging restaurant website designed to highlight the brand and menu experience.
+        Features include a dynamic menu layout, blog section, gallery showcase, and contact page, all crafted with a modern and responsive UI.`,
         coverImage: "/pato.png",
-        techStack: ["React", "Next.js", "Tailwind", "Node.js"],
-        repoUrl: "https://github.com/username/ecommerce",
-        demoUrl: "https://ecommerce-demo.vercel.app",
-        featured: true,
+        techStack: ["React", "Tailwind", "React-Router", "Framer-Motion"],
+        repoUrl: "https://github.com/abdelrhman-mostafa95/Pato-Restaurant.git",
+        demoUrl: "https://pato-restaurant-alpha.vercel.app/",
+        featured: false,
         features: [
-            "Responsive design",
-            "Shopping cart functionality",
-            "Payment integration",
-            "Admin dashboard"
+            "Responsive design across all devices",
+            "Modern and clean UI",
+            "Well-structured menu layout",
+            "Blog section with readable content layout",
+            "Image gallery showcase",
+            "Smooth animations and transitions",
+            "Consistent design system",
+            "User-friendly navigation",
         ]
     },
     {
         id: 2,
-        title: "Dashboard App",
-        description: "An interactive dashboard with real-time data visualization, charts, and analytics for business insights.",
-        coverImage: "/projects/dashboard.png",
-        techStack: ["React", "TypeScript", "Chart.js"],
-        repoUrl: "https://github.com/username/dashboard",
-        demoUrl: "https://dashboard-demo.vercel.app",
+        title: "WebUni YouTube courses ( E-Learning Website UI)",
+        description: `A modern e-learning website UI designed for browsing and watching YouTube-based courses. The project focuses on clean layouts, intuitive navigation, and an engaging learning experience, built as a frontend-only interface.`,
+        coverImage: "/Web.png",
+        techStack: ["React",
+            "JavaScript",
+            "Tailwind CSS",
+            "React Router",
+            "Framer Motion",
+            "Local Storage Authentication"],
+        repoUrl: "https://github.com/abdelrhman-mostafa95/WebUni.git",
+        demoUrl: "https://web-uni-zzxu.vercel.app/",
         features: [
-            "Real-time data updates",
-            "Interactive charts",
-            "Dark/Light mode"
+            "Responsive e-learning website UI",
+            "Course listing and browsing experience",
+            "YouTube-based course layout",
+            "Smooth page transitions and animations",
+            "Client-side authentication using local storage",
+            "Protected routes with React Router",
+            "Clean and modern UI design",
+            "Reusable React components",
+            "State management using React Hooks",
+            "Mobile-first and responsive layout"
         ]
     },
     {
         id: 3,
-        title: "Portfolio Website",
-        description: "A beautiful portfolio website showcasing projects and skills with smooth animations and modern design.",
-        coverImage: "/projects/portfolio.png",
-        techStack: ["React", "Framer Motion", "Tailwind"],
-        repoUrl: "https://github.com/username/portfolio",
-        demoUrl: "https://portfolio-demo.vercel.app",
+        title: "Burger Home Page & Menu Page",
+        description: `A modern landing page for a burger restaurant featuring a visually appealing home section and a well-structured menu layout.
+The project focuses on clean UI design, smooth interactions, and a fully responsive experience across devices.`,
+        coverImage: "/burger.png",
+        techStack: ["HTML", "CSS", "Bootstrap", "JavaScript"],
+        repoUrl: "https://github.com/abdelrhman-mostafa95/Burger.git",
+        demoUrl: "https://burger-t1z4.vercel.app/",
+        features: [
+            "Responsive layout using Bootstrap",
+            "Modern and clean UI design",
+            "Home and menu landing page sections",
+            "Dark and light mode toggle",
+            "Interactive UI elements with JavaScript",
+            "Mobile-first and cross-browser support",
+            "Clean and structured HTML & CSS",
+            "Smooth UI interactions"
+        ]
     },
 ];
 
@@ -111,30 +156,44 @@ const projects = [
 const freelanceProjects = [
     {
         id: 1,
-        title: "Client E-Commerce Store",
-        description: "Built a complete e-commerce solution for a retail business. Included product management, inventory tracking, and order processing systems.",
-        coverImage: "/freelance/project1.png",
-        category: "E-Commerce",
-        techStack: ["React", "Node.js", "MongoDB", "Stripe"],
+        title: "Rifstage Entertainment Hub",
+        description: `Rifstage is a modern entertainment platform that brings together music, YouTube video links, and written articles in one place.
+The platform features an admin dashboard for managing content, while the website displays playlists, single tracks, video links, and articles in a clean and user-friendly interface.`,
+        coverImage: "rifstage-1.png",
+        category: "Entertainment Platform",
+        techStack: ["Next.js", "Tailwind CSS", "JavaScript", "Supabase", "Framer Motion"],
         deliverables: [
             "Full Website",
             "Admin Panel",
-            "Payment Integration",
             "Mobile Responsive"
+        ],
+        photos: [
+            "/rifstage-2.png",
+            "/rifstage-3.png",
+            "/rifstage-4.png",
+            "/rifstage-5.png",
+            "/rifstage-6.png",
+            "/rifstage-7.png",
+            "/rifstage-8.png",
         ]
     },
     {
         id: 2,
-        title: "Business Landing Page",
-        description: "Designed and developed a modern landing page for a startup company with animations and lead generation forms.",
-        coverImage: "/freelance/project2.png",
-        category: "Landing Page",
-        techStack: ["React", "Tailwind", "Framer Motion"],
+        title: "HealthCare Platform",
+        description: `A comprehensive admin dashboard designed to manage users, handle incoming requests and prescriptions, and respond directly to submissions.
+The system allows creating companies with customizable fields that users can fill in to generate insurance cards, all managed through a structured and user-friendly interface.`,
+        coverImage: "/HealthCare-1.png",
+        category: "HealthCare Platform",
+        techStack: ["React", "Tailwind", "Recharts", "Framer Motion"],
         deliverables: [
             "Responsive Design",
             "Contact Forms",
             "SEO Optimized",
             "Fast Loading"
+        ],
+        photos: [
+            "/HealthCare-2.png",
+            "/HealthCare-3.png"
         ]
     },
 ];
@@ -166,39 +225,33 @@ export default function FrontendPortfolio() {
                 ]}
                 education={[
                     {
-                        title: "ITI - Frontend Development",
-                        subtitle: "Information Technology Institute",
-                        date: "Sep 2025 - Dec 2025"
-                    },
-                    {
                         title: "B.Sc. Mechanical Engineering",
-                        subtitle: "Faculty of Engineering",
-                        date: "2013 - 2018"
+                        subtitle: "Arab Academy for Science, Technology and Maritime Transport",
+                        date: "2013 - 2018",
+                        logo: "/aast.png"
                     }
                 ]}
                 internship={[
                     {
-                        title: "Frontend Developer Intern",
-                        subtitle: "Tech Company Name",
-                        date: "Jan 2026 - Present"
+                        title: "ITI - Information Technology Institute",
+                        subtitle: "Frontend and Cross-Platform Development Track",
+                        date: "July 2025 - December 2025",
+                        logo: "/iti.png"
                     }
                 ]}
                 courses={[
                     {
-                        title: "React - The Complete Guide",
-                        subtitle: "Udemy - Maximilian Schwarzmüller",
-                        date: "2025"
+                        title: "Route Academy",
+                        subtitle: "Flutter Diploma",
+                        date: "2024",
+                        logo: "route.png"
                     },
                     {
-                        title: "JavaScript Algorithms & DS",
-                        subtitle: "freeCodeCamp",
-                        date: "2025"
+                        title: "itida",
+                        subtitle: "Freelancing Program",
+                        date: "2025",
+                        logo: "itida.png"
                     },
-                    {
-                        title: "Next.js & React",
-                        subtitle: "Udemy",
-                        date: "2025"
-                    }
                 ]}
             />
 
@@ -227,10 +280,10 @@ export default function FrontendPortfolio() {
                 />
 
                 <ContactSection
-                    whatsapp="201234567890"
-                    github="https://github.com/yourusername"
-                    linkedin="https://linkedin.com/in/yourusername"
-                    email="your.email@example.com"
+                    whatsapp="+201029454138"
+                    github="https://github.com/abdelrhman-mostafa95"
+                    linkedin="https://www.linkedin.com/in/abdel-rahman-mostafa-saad/"
+                    email="abdelrhman.mostafa1095@gmail.com"
                 />
 
                 <Footer name="Abdel-Rahman Mostafa" />

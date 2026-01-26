@@ -92,52 +92,22 @@ const ProjectCard = ({ project, index, isActive, onClick }) => {
                     {project.description}
                 </p>
 
-                {/* Links */}
-                <div className="flex items-center gap-4">
-                    {project.repoUrl && (
-                        <motion.a
-                            href={project.repoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium"
-                            style={{
-                                backgroundColor: `${colors.secondary}50`,
-                                color: colors.background
-                            }}
-                            whileHover={{
-                                scale: 1.05,
-                                backgroundColor: colors.secondary
-                            }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <FaGithub />
-                            <span>Code</span>
-                        </motion.a>
-                    )}
-
-                    {project.demoUrl && (
-                        <motion.a
-                            href={project.demoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium"
-                            style={{
-                                backgroundColor: colors.accent,
-                                color: colors.primary
-                            }}
-                            whileHover={{
-                                scale: 1.05,
-                                boxShadow: `0 10px 30px ${colors.accent}50`
-                            }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <FaExternalLinkAlt />
-                            <span>Live Demo</span>
-                        </motion.a>
-                    )}
-                </div>
+                {/* Details Button */}
+                <motion.button
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium w-full justify-center"
+                    style={{
+                        backgroundColor: colors.accent,
+                        color: colors.primary
+                    }}
+                    whileHover={{
+                        scale: 1.05,
+                        boxShadow: `0 10px 30px ${colors.accent}50`
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <span>View Details</span>
+                    <FaArrowRight />
+                </motion.button>
             </div>
 
             {/* Hover Glow Effect */}
@@ -154,6 +124,8 @@ const ProjectCard = ({ project, index, isActive, onClick }) => {
 
 // Project Modal for expanded view
 const ProjectModal = ({ project, onClose }) => {
+    const { colors } = useTheme();
+
     if (!project) return null;
 
     return (
