@@ -126,9 +126,20 @@ const ProjectCard = ({ project, index, isActive, onClick }) => {
 
 // Project Modal for expanded view
 const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
-  const { colors } = useTheme();
+  const { colors, isDark } = useTheme();
 
   if (!project) return null;
+
+  // معكوسة الألوان للـ modal
+  const invertedColors = {
+    primary: colors.background,
+    secondary: colors.secondary,
+    accent: colors.accent,
+    background: colors.primary,
+  };
+
+  // استخدام الألوان المعكوسة في ال modal
+  const modalColors = invertedColors;
 
   return (
     <motion.div
@@ -141,13 +152,13 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
       {/* Backdrop */}
       <div
         className="absolute inset-0 backdrop-blur-md"
-        style={{ backgroundColor: `${colors.primary}90` }}
+        style={{ backgroundColor: `${modalColors.primary}90` }}
       />
 
       {/* Modal Content */}
       <motion.div
         className="relative w-full max-w-4xl max-h-[90vh] overflow-auto rounded-3xl"
-        style={{ backgroundColor: colors.background }}
+        style={{ backgroundColor: modalColors.background }}
         initial={{ scale: 0.9, y: 50 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 50 }}
@@ -157,8 +168,8 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
         <motion.button
           className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full flex items-center justify-center text-xl cursor-pointer"
           style={{
-            backgroundColor: colors.primary,
-            color: colors.background,
+            backgroundColor: modalColors.primary,
+            color: modalColors.background,
           }}
           onClick={onClose}
           whileHover={{ scale: 1.1 }}
@@ -171,7 +182,7 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
         {project.videoUrl ? (
           <div
             className="relative py-8 flex justify-center rounded-t-3xl"
-            style={{ backgroundColor: colors.background }}
+            style={{ backgroundColor: modalColors.background }}
           >
             <PhoneMockup>
               <VideoPlayer src={project.videoUrl} poster={project.coverImage} />
@@ -187,7 +198,7 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
             <div
               className="absolute inset-0"
               style={{
-                background: `linear-gradient(to top, ${colors.background} 0%, transparent 50%)`,
+                background: `linear-gradient(to top, ${modalColors.background} 0%, transparent 50%)`,
               }}
             />
           </div>
@@ -202,8 +213,8 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
                 key={i}
                 className="px-3 py-1 rounded-full text-xs font-medium"
                 style={{
-                  backgroundColor: colors.primary,
-                  color: colors.background,
+                  backgroundColor: modalColors.primary,
+                  color: modalColors.background,
                 }}
               >
                 {tech}
@@ -213,14 +224,14 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
 
           <h2
             className="text-3xl md:text-4xl font-bold mb-4"
-            style={{ color: colors.primary }}
+            style={{ color: modalColors.primary }}
           >
             {project.title}
           </h2>
 
           <p
             className="text-lg mb-8 leading-relaxed"
-            style={{ color: colors.secondary }}
+            style={{ color: modalColors.secondary }}
           >
             {project.description}
           </p>
@@ -230,7 +241,7 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
             <div className="mb-8">
               <h4
                 className="text-lg font-semibold mb-4"
-                style={{ color: colors.primary }}
+                style={{ color: modalColors.primary }}
               >
                 Key Features
               </h4>
@@ -239,10 +250,10 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
                   <div
                     key={i}
                     className="flex items-center gap-2 p-3 rounded-xl"
-                    style={{ backgroundColor: `${colors.accent}30` }}
+                    style={{ backgroundColor: `${modalColors.accent}30` }}
                   >
-                    <span style={{ color: colors.primary }}>✓</span>
-                    <span style={{ color: colors.secondary }}>{feature}</span>
+                    <span style={{ color: modalColors.primary }}>✓</span>
+                    <span style={{ color: modalColors.secondary }}>{feature}</span>
                   </div>
                 ))}
               </div>
@@ -258,8 +269,8 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium"
                 style={{
-                  backgroundColor: colors.primary,
-                  color: colors.background,
+                  backgroundColor: modalColors.primary,
+                  color: modalColors.background,
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -276,12 +287,12 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium"
                 style={{
-                  backgroundColor: colors.accent,
-                  color: colors.primary,
+                  backgroundColor: modalColors.accent,
+                  color: modalColors.primary,
                 }}
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: `0 10px 30px ${colors.accent}50`,
+                  boxShadow: `0 10px 30px ${modalColors.accent}50`,
                 }}
                 whileTap={{ scale: 0.95 }}
               >
