@@ -253,7 +253,9 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
                     style={{ backgroundColor: `${modalColors.accent}30` }}
                   >
                     <span style={{ color: modalColors.primary }}>✓</span>
-                    <span style={{ color: modalColors.secondary }}>{feature}</span>
+                    <span style={{ color: modalColors.secondary }}>
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </div>
