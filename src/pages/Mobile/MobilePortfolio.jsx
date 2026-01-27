@@ -83,6 +83,7 @@ Students can purchase courses, watch lessons, and rate both courses and instruct
 Instructors can create and manage courses, upload videos, set prices, and track student engagement.
 The platform also includes a community where users can share posts, like, and comment.`,
     coverImage: "/codexa-1.png",
+    videoUrl: "/codexa.mp4",
     techStack: [
       "Flutter",
       "Bloc/cubit",
@@ -103,34 +104,42 @@ The platform also includes a community where users can share posts, like, and co
   },
   {
     id: 2,
-    title: "Mobile App 1",
-    description: `A modern mobile application built with Flutter. [Update this description with your actual project details]`,
+    title: "Task Manager",
+    description: `Task Manager is a productivity application designed to help administrators manage teams efficiently.
+Admins can assign tasks to employees, track task progress, and monitor attendance and check-in/check-out records.
+Employees can update task statuses and submit attendance requests directly through the app.
+All attendance and task updates are sent to the admin for review, approval, or rejection.`,
     coverImage: "/task-1.png",
-    techStack: ["Flutter", "Dart", "Firebase"],
-    repoUrl: "https://github.com/yourusername/project1",
+    videoUrl: "/TaskManagment.mp4",
+    techStack: ["Flutter", "Hive", "Provider"],
+    repoUrl: "https://github.com/abdelrhman-mostafa95/Task-Management.git",
     demoUrl: "#",
     featured: false,
     features: [
-      "Cross-platform support (iOS & Android)",
-      "Modern and clean UI",
-      "Firebase integration",
-      "Responsive design",
+      "Admin dashboard to assign and manage tasks",
+      "Employee task list with real-time status updates",
+      "Task status tracking (Pending, In Progress, Completed)",
+      "Employee attendance with check-in and check-out",
     ],
   },
   {
     id: 3,
-    title: "Mobile App 1",
-    description: `A modern mobile application built with Flutter. [Update this description with your actual project details]`,
+    title: "Islami App",
+    description: `Islami App is a comprehensive Islamic application that includes the Holy Quran, Hadith, digital Tasbeeh, and Islamic radio.
+The app offers a clean and easy-to-use interface with both light and dark themes for comfortable reading.
+It is designed to help users stay connected to their daily worship anytime and anywhere.`,
     coverImage: "/islami-1.png",
-    techStack: ["Flutter", "Dart", "Firebase"],
-    repoUrl: "https://github.com/yourusername/project1",
+    videoUrl: "/islami.mp4",
+    techStack: ["Flutter", "Provider", "Localization"],
+    repoUrl: "https://github.com/abdelrhman-mostafa95/Islami_app.git",
     demoUrl: "#",
     featured: false,
     features: [
-      "Cross-platform support (iOS & Android)",
-      "Modern and clean UI",
-      "Firebase integration",
-      "Responsive design",
+      "Full Holy Quran with easy navigation",
+      "Collection of authentic Hadiths",
+      "Digital Tasbeeh (Sebha) counter",
+      "Live Islamic Radio streaming",
+      "Light and Dark themes",
     ],
   },
   // Add more projects here
@@ -140,23 +149,45 @@ The platform also includes a community where users can share posts, like, and co
 const freelanceProjects = [
   {
     id: 1,
-    title: "Freelance Mobile App 1",
-    description: `A freelance mobile application project. [Update this with your actual freelance project details]`,
+    title: "Nibras-University WebView App",
+    description: `Nibras-University WebView App is a mobile application that provides seamless access to the university’s web platform through an integrated WebView.
+The app supports essential device features such as location access, image and file uploads to ensure full functionality.
+It automatically detects internet connectivity, pausing when the connection is lost and resuming smoothly once the internet is restored.`,
     coverImage: "/nubras-1.png",
     category: "",
-    techStack: ["Flutter", "Firebase", "Dart"],
-    deliverables: ["Full Mobile App", "Admin Panel", "Cross Platform"],
-    photos: ["/freelance-mobile-1.png"],
+    techStack: ["Flutter", "Web View", "Android"],
+    deliverables: ["premision handling", "connectivity handling"],
+    photos: [
+      "/nubras-6.png",
+      "/nubras-2.png",
+      "/nubras-3.jpeg",
+      "/nubras-4.jpeg",
+      "/nubras-5.jpeg",
+    ],
   },
   {
     id: 2,
-    title: "Freelance Mobile App 1",
-    description: `A freelance mobile application project. [Update this with your actual freelance project details]`,
+    title: "HealthCare App Project",
+    description: `Health Care App allows users to securely sign in and access available insurance companies in one place.
+Users can add their insurance card, submit requests, or upload prescriptions to receive medications easily.
+The app also enables users to track the status of their requests in real time for a smooth healthcare experience.`,
     coverImage: "/HealthCare-1.png",
-    category: "nubras-1.png",
-    techStack: ["Flutter", "Firebase", "Dart"],
-    deliverables: ["Full Mobile App", "Admin Panel", "Cross Platform"],
-    photos: ["/freelance-mobile-1.png"],
+    techStack: [
+      "Flutter",
+      "Animation",
+      "Dio",
+      "Sharedpreferences",
+      "Provider",
+      "Bloc/Cubit",
+    ],
+    deliverables: ["Full Mobile App", "State Management", "API Integration"],
+    photos: [
+      "/HealthCare-2.jpeg",
+      "/HealthCare-3.jpeg",
+      "/HealthCare-4.jpeg",
+      "/HealthCare-5.jpeg",
+      "/HealthCare-6.jpeg",
+    ],
   },
   // Add more freelance projects here
 ];
@@ -176,7 +207,7 @@ export default function MobilePortfolio() {
           subtitle="I build cross-platform mobile applications with Flutter, focusing on performance and great user experience."
           cta1="View Projects"
           cta2="Contact Me"
-          cvLink="/mobile-cv.pdf"
+          cvLink="/Flutter-Developer_Abdelrahman.pdf"
           role="MOBILE DEVELOPER"
         />
       </section>
@@ -196,7 +227,7 @@ export default function MobilePortfolio() {
               title: "B.Sc. Mechanical Engineering",
               subtitle:
                 "Arab Academy for Science, Technology and Maritime Transport",
-              date: "2013 - 2018",
+              date: "",
               logo: "/aast.png",
             },
           ]}
@@ -232,6 +263,7 @@ export default function MobilePortfolio() {
             title="My Mobile Projects"
             subtitle="Here are some of my recent mobile development projects. Click on any project to see more details."
             projects={projects}
+            hideDemoButton={true}
           />
         </section>
 
