@@ -130,16 +130,14 @@ const ProjectModal = ({ project, onClose, hideDemoButton = false }) => {
 
   if (!project) return null;
 
-  // معكوسة الألوان للـ modal
-  const invertedColors = {
+  // تبديل الألوان في الـ modal
+  // الخطوط الفاتحة في الليل → غامقة في النهار والعكس
+  const modalColors = {
     primary: colors.background,
-    secondary: colors.secondary,
+    secondary: colors.accent,
     accent: colors.accent,
     background: colors.primary,
   };
-
-  // استخدام الألوان المعكوسة في ال modal
-  const modalColors = invertedColors;
 
   return (
     <motion.div
