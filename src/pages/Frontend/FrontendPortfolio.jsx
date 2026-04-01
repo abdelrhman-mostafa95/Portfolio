@@ -202,6 +202,36 @@ The system allows creating companies with customizable fields that users can fil
     ],
     photos: ["/HealthCare-2.png", "/HealthCare-3.png"],
   },
+   {
+    id: 3,
+    title: "Rwasihk RealState",
+    description: `The platform includes a public-facing website that introduces the company, its services, and available offers, alongside a powerful employee system that allows staff to manage and publish offers dynamically.`,
+    coverImage: "/rwashk-1.png",
+    category: "ٌRwasihk Platform",
+    techStack: ["React", "Tailwind", "Recharts", "Framer Motion", "node.js"],
+    deliverables: [
+      "Responsive Design",
+      "Contact Forms",
+      "SEO Optimized",
+      "Fast Loading",
+    ],
+    photos: ["/rwashk-10.png", "/rwashk-2.png", "/rwashk-3.png", "/rwashk-4.png", "/rwashk-5.png", "/rwashk-6.png", "/rwashk-7.png", "/rwashk-8.png", "/rwashk-9.png"],
+  },
+  {
+    id: 4,
+    title: "Sadu Botique",
+    description: `A complete digital solution developed for Sadu Boutique Hotels in Saudi Arabia, featuring a modern and elegant landing page, a fully functional contact page, and a comprehensive content management dashboard.`,
+    coverImage: "/sadu-1.png",
+    category: "ٌRwasihk Platform",
+    techStack: ["React", "Tailwind", "Recharts", "Framer Motion", "Firebase"],
+    deliverables: [
+      "Responsive Design",
+      "Contact Forms",
+      "SEO Optimized",
+      "Fast Loading",
+    ],
+    photos: ["/sadu-2.png", "/sadu-3.png", "/sadu-4.png", "/sadu-5.png", "/sadu-6.png", ],
+  },
 ];
 
 export default function FrontendPortfolio() {

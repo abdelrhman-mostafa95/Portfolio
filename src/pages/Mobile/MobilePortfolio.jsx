@@ -189,6 +189,31 @@ The app also enables users to track the status of their requests in real time fo
       "/HealthCare-6.jpeg",
     ],
   },
+  {
+  id: 2,
+  title: "FOOZ Glamour Spa App",
+  description: `FOOZ is a home spa mobile application that connects clients with service providers for at-home beauty and spa services.
+The app supports two types of users: client and provider.
+Clients can browse and request specific services such as nails, choose a suitable time based on available slots, add their home location on the map, and complete payment through the app.
+Providers receive booking requests, manage their availability, travel to the client’s address, complete the service, and receive ratings and reviews after each appointment.`,
+  coverImage: "/fooz-4.png",
+  category: "",
+  techStack: ["Flutter", "Firebase"],
+  deliverables: [
+    "service booking system",
+    "role-based users",
+    "availability scheduling",
+    "map location selection",
+    "online payment",
+    "rating and review system"
+  ],
+  video:"/fooz - client.mp4",
+  photos: [
+    "/fooz-1.png",
+    "/fooz-2.png",
+    "/fooz-3.png",
+  ],
+}
   // Add more freelance projects here
 ];
 

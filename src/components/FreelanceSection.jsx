@@ -9,8 +9,11 @@ import {
   FaCheckCircle,
   FaImages,
   FaTimes,
+  FaPlay,
 } from "react-icons/fa";
 import { darkColors, lightColors } from "../context/ThemeContext";
+import VideoPlayer from "../components/VideoPlayer";
+import PhoneMockup from "../components/PhoneMockup";
 
 // Photo Gallery Modal
 const PhotoGalleryModal = ({
@@ -149,6 +152,74 @@ const PhotoGalleryModal = ({
               </div>
             )}
           </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+// Video Modal Component
+const VideoModal = ({ video, isOpen, onClose, projectTitle, invertedColors }) => {
+  const colors = invertedColors;
+
+  if (!isOpen || !video) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        {/* Backdrop */}
+        <div
+          className="absolute inset-0 backdrop-blur-md"
+          style={{ backgroundColor: `${colors.primary}95` }}
+        />
+
+        {/* Modal Content */}
+        <motion.div
+          className="relative w-full max-w-md"
+          initial={{ scale: 0.9, y: 50 }}
+          animate={{ scale: 1, y: 0 }}
+          exit={{ scale: 0.9, y: 50 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close Button */}
+          <motion.button
+            className="absolute -top-12 right-0 w-10 h-10 rounded-full flex items-center justify-center z-10"
+            style={{
+              backgroundColor: colors.background,
+              color: colors.primary,
+            }}
+            onClick={onClose}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FaTimes />
+          </motion.button>
+
+          {/* Phone Mockup with Video */}
+          <PhoneMockup>
+            <VideoPlayer
+              src={video}
+              autoPlayOnMount={true}
+              autoPlayOnHover={false}
+            />
+          </PhoneMockup>
+
+          {/* Project Title */}
+          <motion.p
+            className="text-center mt-4 text-sm font-medium"
+            style={{ color: colors.background }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.8 }}
+            transition={{ delay: 0.2 }}
+          >
+            {projectTitle}
+          </motion.p>
         </motion.div>
       </motion.div>
     </AnimatePresence>
@@ -311,6 +382,30 @@ const FreelanceCard = ({ project, index, invertedColors }) => {
               <span>View Photos</span>
             </motion.button>
           )}
+
+          {/* Watch Demo Button - Only shows if video exists */}
+          {project.video && (
+            <motion.button
+              onClick={() => project.onWatchDemo && project.onWatchDemo()}
+              className="mt-3 w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium"
+              style={{
+                backgroundColor: colors.primary,
+                color: colors.background,
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7 }}
+              whileHover={{
+                scale: 1.02,
+                boxShadow: `0 10px 30px ${colors.primary}50`,
+              }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <FaPlay />
+              <span>Watch Demo</span>
+            </motion.button>
+          )}
         </div>
 
         {/* Hover Glow Effect */}
@@ -337,6 +432,7 @@ export default function FreelanceSection({
 
   const [selectedProject, setSelectedProject] = useState(null);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   const openGallery = (project) => {
     setSelectedProject(project);
@@ -345,6 +441,16 @@ export default function FreelanceSection({
 
   const closeGallery = () => {
     setIsGalleryOpen(false);
+    setTimeout(() => setSelectedProject(null), 300);
+  };
+
+  const openVideoModal = (project) => {
+    setSelectedProject(project);
+    setIsVideoModalOpen(true);
+  };
+
+  const closeVideoModal = () => {
+    setIsVideoModalOpen(false);
     setTimeout(() => setSelectedProject(null), 300);
   };
 
@@ -433,6 +539,7 @@ export default function FreelanceSection({
               project={{
                 ...project,
                 onViewPhotos: () => openGallery(project),
+                onWatchDemo: () => openVideoModal(project),
               }}
               index={index}
               invertedColors={colors}
@@ -460,6 +567,17 @@ export default function FreelanceSection({
           photos={selectedProject.photos}
           isOpen={isGalleryOpen}
           onClose={closeGallery}
+          projectTitle={selectedProject.title}
+          invertedColors={colors}
+        />
+      )}
+
+      {/* Video Modal */}
+      {isVideoModalOpen && selectedProject && (
+        <VideoModal
+          video={selectedProject.video}
+          isOpen={isVideoModalOpen}
+          onClose={closeVideoModal}
           projectTitle={selectedProject.title}
           invertedColors={colors}
         />
